@@ -1,248 +1,255 @@
-# 🛫 Scenic Seat Recommender
+# 🛫 Seat Recommender
 
-A Next.js and Express.js application that helps travelers choose the best airplane window seat for scenic views like sunrises and sunsets.
+Seat Recommender is a full-stack travel app designed to help passengers choose the best airplane window seat for scenic views based on flight route, sun position, and travel time. Built with Next.js on the frontend and Express.js on the backend, it gives a clean, modern experience for travelers who want to maximize sunrise, sunset, and daylight viewing during flights.
 
-## 🌟 Features
+Built and maintained by Rohan.
 
-- **Smart Seat Recommendations**: Get left/right side recommendations based on flight path and sun position
-- **Real-time Flight Paths**: Great-circle route calculations using Turf.js
-- **Sun Position Tracking**: Accurate astronomical calculations with SunCalc
-- **Interactive Maps**: Leaflet.js visualization of flight paths and sun positions
-- **Modern UI**: Beautiful, responsive design matching the provided mockups
-- **Airport Data**: External API integration for worldwide airport coordinates
+## 🌟 Project Overview
 
-## 🚀 Tech Stack
+This application lets users:
+
+- enter departure and arrival airports
+- select a flight date and time
+- get a seat recommendation such as left or right side window seat
+- see a flight path and sun-position based logic
+- view a travel-friendly recommendation experience built around scenic view optimization
+
+## ✨ Features
+
+- Smart left/right window seat recommendation based on sun direction
+- Airport search with airline/airport suggestions
+- Flight path and route logic
+- Sun angle and daylight evaluation
+- Modern landing page experience with responsive UI
+- Express backend with API endpoints
+- Local airport dataset support for offline-ready lookups
+- CORS and security middleware for API usage
+
+## 🧩 Tech Stack
 
 ### Frontend
-- **Next.js** - React framework for production
-- **React Icons** - Beautiful icon library
-- **Leaflet.js** - Interactive maps
-- **Axios** - HTTP client
+- Next.js
+- React
+- Axios
+- Leaflet
+- React Icons
 
 ### Backend
-- **Express.js** - Web application framework
-- **Turf.js** - Geospatial analysis
-- **SunCalc** - Sun position calculations
-- **Node-cache** - In-memory caching
-- **Helmet** - Security headers
-- **CORS** - Cross-origin resource sharing
+- Node.js
+- Express.js
+- SunCalc
+- Node-cache
+- Helmet
+- CORS
 
-## 📦 Installation
+## 📁 Repository Structure
+
+```bash
+Seat-Recommender/
+├── backend/
+│   ├── src/
+│   │   ├── index.js
+│   │   ├── routes/
+│   │   │   └── flight.js
+│   │   └── services/
+│   │       ├── airportDataset.js
+│   │       ├── airportService.js
+│   │       ├── flightPathService.js
+│   │       └── sunService.js
+│   ├── .env.example
+│   ├── package.json
+│   └── serverless.yml
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── styles/
+│   ├── .env.example
+│   ├── next.config.js
+│   ├── package.json
+│   └── vercel.json
+├── package.json
+├── README.md
+└── .gitignore
+```
+
+## 🚀 Local Setup
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm or yarn
+- Node.js 18+
+- npm
 
-### Quick Start
+### 1. Clone the project
+```bash
+git clone https://github.com/Rohan692023/Seat-Recommender.git
+cd Seat-Recommender
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/scenic-seat-recommender.git
-   cd scenic-seat-recommender
-   ```
+### 2. Install dependencies
+```bash
+npm install
+cd backend && npm install
+cd ../frontend && npm install
+```
 
-2. **Install all dependencies**
-   ```bash
-   npm run install:all
-   ```
+### 3. Create environment files
 
-3. **Set up environment variables**
-   
-   **Backend (.env in backend/ folder):**
-   ```bash
-   cd backend
-   cp .env.example .env
-   ```
-   Edit `.env` and add your airport API key:
-   ```
-   AIRPORT_API_KEY=your_aviationstack_api_key
-   AIRPORT_API_URL=https://api.aviationstack.com/v1
-   PORT=4000
-   NODE_ENV=development
-   FRONTEND_URL=http://localhost:3000
-   ```
+Backend:
+```bash
+cd ../backend
+copy .env.example .env
+```
 
-   **Frontend (.env.local in frontend/ folder):**
-   ```bash
-   cd frontend
-   cp .env.example .env.local
-   ```
-   Edit `.env.local`:
-   ```
-   NEXT_PUBLIC_API_URL=http://localhost:4000/api
-   NEXT_PUBLIC_PORT=3000
-   ```
+Frontend:
+```bash
+cd ../frontend
+copy .env.example .env.local
+```
 
-4. **Get an API key** (for airport data)
-   - Sign up at [AviationStack](https://aviationstack.com/) 
-   - Get your free API key
-   - Add it to `backend/.env`
+### 4. Add environment variables
 
-## 🏃‍♂️ Running the Application
+Backend `.env`:
+```env
+AIRPORT_API_KEY=your_aviationstack_api_key
+AIRPORT_API_URL=https://api.aviationstack.com/v1
+PORT=4000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3000
+```
 
-### Development Mode
+Frontend `.env.local`:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_PORT=3000
+```
 
-**Option 1: Run both frontend and backend together**
+### 5. Run app locally
+From root:
 ```bash
 npm run dev
 ```
 
-**Option 2: Run separately**
-
-Backend only:
-```bash
-npm run dev:backend
+Frontend will run on:
+```text
+http://localhost:3000
 ```
 
-Frontend only:
-```bash
-npm run dev:frontend
-```
-
-### Production Mode
-
-**Build the frontend:**
-```bash
-npm run build
-```
-
-**Start both services:**
-```bash
-npm start
-```
-
-## 🌐 Access the Application
-
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:4000/api
-
-## 📁 Project Structure
-
-```
-scenic-seat-recommender/
-├── backend/
-│   ├── src/
-│   │   ├── index.js           # Express server entry point
-│   │   ├── routes/
-│   │   │   └── flight.js      # Flight recommendation API
-│   │   └── services/
-│   │       ├── airportService.js    # Airport data fetching
-│   │       ├── flightPathService.js # Great-circle calculations
-│   │       └── sunService.js        # Sun position calculations
-│   ├── package.json
-│   └── .env.example
-├── frontend/
-│   ├── pages/
-│   │   ├── index.js           # Landing page with form
-│   │   ├── results.js         # Results page with map
-│   │   └── _app.js            # Next.js app configuration
-│   ├── components/
-│   │   ├── Map.js             # Leaflet map component
-│   │   └── Recommendation.js   # Seat recommendation display
-│   ├── styles/
-│   │   └── global.css         # Global styles
-│   ├── next.config.js         # Next.js configuration
-│   ├── package.json
-│   └── .env.example
-├── package.json               # Root package.json with scripts
-└── README.md
+Backend API will run on:
+```text
+http://localhost:4000/api
 ```
 
 ## 🔧 API Endpoints
 
-### POST /api/flight
-Get seat recommendation and flight path data.
+### GET /api/flight/search
+Search airports by query value.
 
-**Request Body:**
+Example:
+```bash
+http://localhost:4000/api/flight/search?q=JFK&limit=6
+```
+
+### POST /api/flight
+Returns the best scenic seat recommendation.
+
+Request body:
 ```json
 {
   "departure": "JFK",
-  "arrival": "LAX", 
-  "datetime": "2024-01-15T10:30:00"
+  "arrival": "LAX",
+  "datetime": "2026-09-08T10:30:00"
 }
 ```
 
-**Response:**
+Response:
 ```json
 {
   "recommendation": "left",
-  "path": [
-    {"lat": 40.6413, "lon": -73.7781},
-    {"lat": 40.5, "lon": -74.0},
-    ...
-  ],
-  "sunPositions": [
-    {"lat": 40.6413, "lon": -73.7781, "azimuth": 1.2, "altitude": 0.3},
-    ...
-  ]
+  "reason": "Left side faces the sun for spectacular sunrise/sunset views",
+  "confidence": "high",
+  "flightInfo": {
+    "distance": 3974.4,
+    "bearing": 300.2,
+    "duration": 265
+  },
+  "sunInfo": {
+    "azimuth": 145.2,
+    "altitude": 18.8,
+    "isDaytime": true
+  },
+  "path": [],
+  "sunPositions": []
 }
 ```
 
-## 🎨 Design Features
+## ☀️ Deployment Guide
 
-The frontend faithfully implements the provided design mockups including:
+### Frontend Deployment on Vercel
+1. Push code to GitHub
+2. Open Vercel
+3. Import project
+4. Select repository root as `frontend`
+5. Framework should auto-detect as Next.js
+6. Add environment variable:
+```env
+NEXT_PUBLIC_API_URL=https://your-render-backend-url.onrender.com/api
+```
+7. Deploy
 
-- **Hero Section**: Gradient background with animated icons
-- **Feature Highlights**: Three-column grid with colored icons
-- **Statistics Section**: Impressive metrics display
-- **Testimonials**: User review with avatar and rating
-- **Form Section**: Clean, modern input form with icons
-- **Responsive Design**: Mobile-first approach
-
-## 🔒 Security
-
-- Helmet.js for security headers
-- CORS configuration
-- Input validation
-- Rate limiting ready (can be added)
-
-## 📈 Performance
-
-- In-memory caching for airport data
-- Optimized API calls
-- Responsive images
-- Minimal bundle size
-
-## 🚀 Deployment
-
-### Vercel (Frontend)
+### Backend Deployment on Render
+1. Open Render dashboard
+2. Create a new Web Service
+3. Connect GitHub repository
+4. Set Root Directory to `backend`
+5. Build Command:
 ```bash
-cd frontend
-vercel --prod
+npm install
+```
+6. Start Command:
+```bash
+npm start
+```
+7. Add environment variables:
+```env
+PORT=10000
+NODE_ENV=production
+AIRPORT_API_KEY=your_aviationstack_api_key
+AIRPORT_API_URL=https://api.aviationstack.com/v1
+FRONTEND_URL=https://your-vercel-frontend-url
+```
+8. Deploy
+
+## 🔐 Required Environment Variables
+
+### Backend
+```env
+AIRPORT_API_KEY=your_aviationstack_api_key
+AIRPORT_API_URL=https://api.aviationstack.com/v1
+PORT=4000
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3000
 ```
 
-### Heroku (Backend)
-```bash
-cd backend
-git init
-heroku create your-app-name
-git add .
-git commit -m "Initial commit"
-git push heroku main
+### Frontend
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+NEXT_PUBLIC_PORT=3000
 ```
 
-### Environment Variables for Production
-Don't forget to set your environment variables in your deployment platform!
+## 📝 Notes
 
-## 🤝 Contributing
+- Use `.env.example` as a template
+- Do not commit actual `.env` files to GitHub
+- Keep the AviationStack key private
+- For production, use Vercel for frontend and Render for backend
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 👤 Author
+
+Rohan
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [AviationStack](https://aviationstack.com/) for airport data API
-- [OpenStreetMap](https://www.openstreetmap.org/) for map tiles
-- [Turf.js](https://turfjs.org/) for geospatial calculations
-- [SunCalc](https://github.com/mourner/suncalc) for astronomical calculations
+This project is open for educational and portfolio use.
 
 ---
 
-Made with ❤️ for travelers who love scenic views ✈️🌅
+Seat Recommender helps travelers make smarter flight decisions by turning sunlight, timing, and route direction into a practical seating recommendation.
