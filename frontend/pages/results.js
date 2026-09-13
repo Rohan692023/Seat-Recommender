@@ -15,7 +15,8 @@ const ResultsComponent = () => {
 
   useEffect(() => {
     if (departure && arrival && datetime) {
-      axios.post(`${process.env.NEXT_PUBLIC_API_URL}/flight`, { departure, arrival, datetime })
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://seat-recommender.onrender.com/api';
+      axios.post(`${apiBase}/flight`, { departure, arrival, datetime })
         .then(res => setData(res.data))
         .catch(err => {
           const msg = err.response?.data?.error || err.message || 'Request failed';

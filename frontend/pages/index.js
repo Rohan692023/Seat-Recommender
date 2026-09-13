@@ -54,7 +54,8 @@ export default function Home() {
     setResError(null);
     setResults(null); // Clear previous results when starting new search
     try {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/flight`, { departure, arrival, datetime });
+      const apiBase = process.env.NEXT_PUBLIC_API_URL || 'https://seat-recommender.onrender.com/api';
+      const res = await axios.post(`${apiBase}/flight`, { departure, arrival, datetime });
       setResults(res.data);
       // scroll to results
       document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
@@ -80,7 +81,7 @@ export default function Home() {
     // Set new timeout for debounced search
     const timeoutId = setTimeout(async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://seat-recommender.onrender.com/api';
         console.log('Fetching suggestions for:', q, 'from:', `${apiUrl}/flight/search`);
         console.log('Full API URL:', `${apiUrl}/flight/search?q=${encodeURIComponent(q)}&limit=6`);
         const res = await fetch(`${apiUrl}/flight/search?q=${encodeURIComponent(q)}&limit=6`, {
