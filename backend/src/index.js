@@ -6,7 +6,7 @@ const flightRouter = require('./routes/flight');
 
 const app = express();
 const allowedOrigins = [
-  'http://localhost:3000',
+  'https://seat-recommender-one.vercel.app/',
   'https://seatfrontend-h6jvpz2up-rohan692023s-projects.vercel.app',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
