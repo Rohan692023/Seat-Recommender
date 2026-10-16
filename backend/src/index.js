@@ -12,17 +12,11 @@ const allowedOrigins = [
 
 app.use(express.json());
 app.use(helmet());
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-      return;
-    }
 
-    callback(new Error('Not allowed by CORS'));
-  },
-  methods: ['POST', 'GET', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
+app.use(cors({
+    origin: 'https://seat-recommender-one.vercel.app',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type']
 }));
 app.use('/api/flight', flightRouter);
 
