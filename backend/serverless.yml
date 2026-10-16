@@ -6,7 +6,7 @@ provider:
   region: us-east-1
   environment:
     NODE_ENV: production
-    FRONTEND_URL: ${env:FRONTEND_URL}
+    FRONTEND_URL: ${https://seat-recommender-one.vercel.app/}
 
 functions:
   api:
